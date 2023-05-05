@@ -1,0 +1,127 @@
+package locator_learning;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.*;
+import org.testng.annotations.Test;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class MySecondLocatorTest {
+	@Test
+	public void myFirstTest() throws InterruptedException{
+		WebDriverManager.firefoxdriver().setup();
+		// create a chromeDriver object named driver.
+		WebDriver driver = new FirefoxDriver();
+
+		// go to edge web page
+		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+		// Maximize the browser window
+//		driver.manage().window().maximize();
+
+		// wait for 5 seconds
+	
+		// search by tag name
+		WebElement header = driver.findElement(By.tagName("h1"));
+		String textString =	header.getText();
+		System.out.println(textString);
+		
+		// search by CSS
+		header = driver.findElement(By.cssSelector("h1"));
+		System.out.println(textString);
+		
+		// search by X path
+		header = driver.findElement(By. xpath("//h1"));
+		System.out.println(textString);
+		
+		// parent and child search by CSS
+		WebElement radiobuttonExamplElement = driver.findElement(By. xpath("//fieldset /legend"));
+		textString = radiobuttonExamplElement.getText();
+		System.out.println(textString);
+		
+		// parent and child search by CSS
+		radiobuttonExamplElement = driver.findElement(By. cssSelector("fieldset > legend"));
+		textString = radiobuttonExamplElement.getText();
+		System.out.println(textString);
+		
+		// multiple attribute detection with x path
+		WebElement radiobutton1 = driver.findElement(By.xpath("//input[@value='radio1' and @name='radioButton']"));
+		radiobutton1.click();
+		
+		Thread.sleep(3000);
+		
+		// multiple attribute detection with css
+		WebElement radiobutton2 = driver.findElement(By.cssSelector("input[value='radio2'][name='radioButton']"));
+		radiobutton2.click();
+		
+		Thread.sleep(3000);
+		
+		// changeable value using substring with x path
+		WebElement radiobutton3 = driver.findElement(By.xpath("//input[contains(@value,'dio3')]"));
+		radiobutton3.click();
+		
+		Thread.sleep(3000);
+		
+		// changeable value using substring with css
+		driver.findElement(By.cssSelector("input[value*='dio1']")).click();
+				
+		Thread.sleep(3000);
+		
+		// using start-with method with x path
+	    driver.findElement(By.xpath("//input[starts-with(@id,'auto')]")).sendKeys("hello world");
+				
+		Thread.sleep(3000);
+		
+	    driver.findElement(By.xpath("//input[starts-with(@id,'auto')]")).clear();
+				
+		Thread.sleep(3000);
+		
+		// using start-with method with css
+	    driver.findElement(By.cssSelector("input[id^='auto']")).sendKeys("hello world 2");
+				
+		Thread.sleep(3000);
+		
+		driver.findElement(By.cssSelector("input[id^='auto']")).clear();
+		
+		Thread.sleep(3000);
+		
+		// using end-with method with css
+	    driver.findElement(By.cssSelector("input[id$='mplete']")).sendKeys("hello world 3");
+				
+		Thread.sleep(3000);
+		
+		driver.findElement(By.cssSelector("input[id$='mplete']")).clear();
+		
+		Thread.sleep(3000);
+		
+		// using any tag with x path
+	    driver.findElement(By.xpath("//*[@id='autocomplete']")).sendKeys("hello world 4");
+				
+		Thread.sleep(3000);
+		
+		String textString = driver.findElement(By.xpath("//label[@for='radio2']/preceding-sibling::label")).getText();
+		System.out.println(textString);
+		
+		Thread.sleep(3000);
+		
+		textString = driver.findElement(By.xpath("//label[@for='radio2']/following-sibling::label")).getText();
+		System.out.println(textString);
+		
+		Thread.sleep(3000);
+		
+		textString = driver.findElement(By.xpath("//fieldset /label[contains(@for,'radio')][2]")).getText();
+		System.out.println(textString);
+		
+		Thread.sleep(3000);
+		
+		textString = driver.findElement(By.cssSelector("fieldset label[for*='radio']:nth-child(2)")).getText();
+		System.out.println(textString);
+		
+		Thread.sleep(3000);
+		
+		// close the browser all active window
+			driver.quit();
+		}
+
+	}

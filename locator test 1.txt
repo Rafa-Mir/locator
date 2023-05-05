@@ -1,0 +1,73 @@
+package locator_learning;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.*;
+import org.testng.annotations.Test;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class MyFirstLocatorTest {
+	@Test
+	public void myFirstTest() throws InterruptedException{
+		WebDriverManager.firefoxdriver().setup();
+		// create a chromeDriver object named driver.
+		WebDriver driver = new FirefoxDriver();
+
+		// go to edge web page
+		driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+		// Maximize the browser window
+//		driver.manage().window().maximize();
+
+		// wait for 5 seconds
+		
+		// wait for 5 seconds
+		
+		// search by tag name
+		WebElement header = driver.findElement(By.tagName("h1"));
+		String textString =	header.getText();
+		System.out.println(textString);
+				
+		// search by ID
+		WebElement checkbox1 = driver.findElement(By.id("checkBoxOption2"));
+		checkbox1.click();
+					
+		// search by class name
+		WebElement tab = driver.findElement(By.className("switch-tab"));
+		System.out.println(tab.getText());
+
+		// search by Link
+		WebElement linkElement = driver.findElement(By.linkText("Free Access to InterviewQues/ResumeAssistance/Material"));
+		System.out.println("Link Tag Name " +linkElement.getTagName());
+					
+		// search by partially link
+		WebElement linkElement1 = driver.findElement(By.partialLinkText("Free Access to InterviewQues"));
+		System.out.println("Link Text" +linkElement1.getText());
+					
+		// search by x path
+		WebElement inputtextElement = driver.findElement(By.xpath("//input[@id='autocomplete']"));
+		inputtextElement.sendKeys("Test Text");
+				
+		// search by CSS locator
+		WebElement inputtext = driver.findElement(By.cssSelector("input[name='enter-name']"));
+		inputtext.sendKeys("Test Text");
+		
+		Thread.sleep(3000);
+					
+		WebElement selectItemElement = driver.findElement(By.cssSelector("select[name='dropdown-class-example']"));
+		// WebElement selectItemElement = driver.findElement(By.className("drop down-class-example"));
+		selectItemElement.click();
+		
+		Thread.sleep(3000);
+					
+		WebElement option2 = driver.findElement(By.xpath("//option[@value='option2']"));
+		option2.click();
+					
+		Thread.sleep(3000);
+					
+		// close the browser all active window
+		driver.quit();
+				}
+
+			}
